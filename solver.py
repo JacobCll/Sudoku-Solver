@@ -12,22 +12,35 @@ board = [
     [1,2,0,0,0,7,4,0,0],
     [0,4,9,2,0,6,0,0,7]
 ]
-# solving alg
+
+# solving algorithm
+# this only solves 1 empty space each time it is called
 def solve(b):
+    # takes the given empty space
     find = find_empty(b)
+    # if there is no empty space in the board, return True to end the program
     if not find:
         return True
     else:
+        # if there is, take its x, y coords
         r, c = find
 
-    # loop 9 times
+    # loop through 1 - 9 and try each number 
     for i in range(1, 10):
-        # check if 
+        # check if it is valid, if it is, assign the number to that empty space
         if valid(b, i, (r,c)):
-            b[]
+            b[r][c] = i
 
+        # go to the next empty space and recursively try to solve the whole board until there is no more
+        if solve(b):
+            # this will only run if find is equal to False
+            return True
+        
+        # if solve is equal to False revert the last coordinate to 0
+        b[r][c] = 0        
 
-
+    # if none of the values iterated in the for loop are valid
+    return False
 
 # checks if the position valid
 # p is the tuple of function find_empty (x, y), n is the input number
@@ -68,13 +81,16 @@ def pr_board(b):
             else:
                 print(str(b[i][j]) + ' ', end='')
 
-pr_board(board)
-
 
 # find empty positions in board and output their coordinates
 def find_empty(b):
     for i in range(len(b)):
-        for j in range(len(b[i])):
+        for j in range(len(b[0])):
             if b[i][j] == 0:
                 return (i,j)
     return None
+
+
+pr_board(board)
+solve(board)
+pr_board(board)

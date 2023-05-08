@@ -32,12 +32,12 @@ def solve(b):
             b[r][c] = i
 
         # go to the next empty space and recursively try to solve the whole board until there is no more
-        if solve(b):
-            # this will only run if find is equal to False
-            return True
-        
-        # if solve is equal to False revert the last coordinate to 0
-        b[r][c] = 0        
+            if solve(b):
+                # this will only run if find is equal to False
+                return True
+            
+                # if solve is equal to False revert the last coordinate to 0
+            b[r][c] = 0        
 
     # if none of the values iterated in the for loop are valid
     return False
@@ -92,5 +92,6 @@ def find_empty(b):
 
 
 pr_board(board)
+print()
 solve(board)
 pr_board(board)
